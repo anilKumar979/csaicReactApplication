@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
-
-
 import { useHistory } from "react-router-dom";
-
 import adminServices from '../services/adminServices';
 import csaicServices from '../services/csaicServices';
 import moment from "moment";
 import CustomDropdown from "./CustomDropdown";
 import CustomDropdownSales from "./CustomDropdownSales";
 import Tabs from './TabComponent/Tabs'
-import { AutoComplete } from "@progress/kendo-react-dropdowns";
 const NofaCreation = (props) => {
-   
+    console.log(props.msg);
     const [region, setregion] = React.useState([]);
     const [show, setShow] = useState(false);
     const [loader, setLoader] = React.useState(false)
@@ -21,22 +17,21 @@ const NofaCreation = (props) => {
     const [customerList, setcustomerList] = React.useState([]);
     const [hide, setHide] = React.useState(true)
     const [customer, setcustomer] = React.useState([]);
+
     // const handleShow = () => setShow(true);
-    const [value, setValue] = React.useState("");
 
 
     const history = useHistory();
 
     const handleShow = (id) => {
-        console.log(id);
         setHide(false)
-        if(id){
+        if (id) {
 
-      
+
             const datavalue = {
-                CustID:id
+                CustID: id
             }
-    
+
             csaicServices.getCustomerByCustId(datavalue).then(
                 response => {
                     console.log(response.data.data)
@@ -47,11 +42,10 @@ const NofaCreation = (props) => {
                 }
             );
         }
-       
+
 
     }
 
-    
 
     const UploadNofa = (id) => {
         // con setLoader(false)sole.log("partyid", user.PARTIES_ID)
@@ -76,16 +70,16 @@ const NofaCreation = (props) => {
 
     useEffect(() => {
         setLoader(true);
-        csaicServices.getRegionList().then(
+
+        csaicServices.getEmpSalesList().then(
             response => {
                 console.log(response.data.data)
-                setregionList(response.data.data)
+                setcustomerList(response.data.data)
                 setLoader(false);
             },
             error => {
             }
         );
-       
         // UploadNofa();
         setTimeout(function () {
 
@@ -100,7 +94,7 @@ const NofaCreation = (props) => {
     }, []);
 
 
- 
+
 
     const renderHeader = () => {
         let headerElement = ['Cust. Name', 'Cust. Phone', 'Sales Rep Name', 'Operation']
@@ -109,7 +103,7 @@ const NofaCreation = (props) => {
             return <th key={index}>{key.toUpperCase()}</th>
         })
     }
-  
+
     const renderBody = () => {
         return region && region.map(({ ID, NAME, PHONE, ADDRESS }) => {
             return (
@@ -133,18 +127,16 @@ const NofaCreation = (props) => {
             )
         })
     }
-    const handleCitySelect = (e) => {
-        console.log(e.target.value);
-        setHide(true)
-        
-        UploadNofa(e.target.value);
-    }
     const backtonofa = () => {
 
         history.push({
             pathname: '/'
         });
     };
+    const handleCitySelect2 = (e) => {
+        setHide(true)
+        UploadNofa(e.target.value);
+    }
     return (
 
         <div className="container">
@@ -163,36 +155,25 @@ const NofaCreation = (props) => {
                 <div className="position-relative row form-group">
                     <div className="col-lg-9">
                         <h4><i className="fa fa-list" aria-hidden="true"></i> CSAIC SEARCH </h4></div>
-                        <div className="col-lg-3"><a className="text-align-right" onClick={backtonofa}><i className="fa fa fa-angle-double-left" aria-hidden="true"></i> Back </a></div>
-
+                    <div className="col-lg-3"><a className="text-align-right" onClick={backtonofa}><i className="fa fa fa-angle-double-left" aria-hidden="true"></i> Back </a></div>
                 </div>
                 <div className="position-relative row form-group">
-                <div className="col-lg-3">
-                <h2 className='H2TEXT'>CUSTOMER SEARCH</h2>
+                    <div className="col-lg-3">
+                        <h2 className='H2TEXT'>SALES REPRESANTATIVE</h2>
                     </div>
                     <div className="col-lg-9">
                         {/* <input className="form-control" type="text" placeholder="Search here" /> */}
-                        {/* <CustomDropdown/> */}
-                        
-                        <select className="form-control" onChange={e => handleCitySelect(e)}>
+                        {/* <CustomDropdownSales /> */}
+
+                        <select className="form-control" onChange={e => handleCitySelect2(e)}>
                             <option value="">Select</option>
-                            {regionlist.map((country, key) => (
+                            {customerList.map((country, key) => (
                                 <option key={key} value={country.ID}>
-                                    {country.NAME}
+                                    {country.EmpName}
                                 </option>
                             ))}
                         </select>
-
                     </div>
-                    {/* <AutoComplete
-      style={{
-        width: "300px",
-      }}
-      data={regionlist}
-      textField="NAME"
-      value={value}
-      onChange={handleCitySelect}
-    /> */}
                 </div>
                 <div className="AB434-CSS">
                     <div className="row">
@@ -211,7 +192,9 @@ const NofaCreation = (props) => {
 
                 </div>
             </div>
-            {hide ? <></> :
+            <div className="prviewcss">
+                <div className="position-relative row form-group">
+                    {hide ? <></> :
                         <div className="AB434-CSS">
                             <Tabs>
                                 <div label="Customer Info" className="">
@@ -349,6 +332,15 @@ const NofaCreation = (props) => {
 
                         </div>
                     }
+                </div>
+            </div>
+
+
+
+            <div>
+
+            </div>
+
         </div>
     );
 };

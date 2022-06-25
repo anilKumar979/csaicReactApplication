@@ -10,8 +10,28 @@
 .tableContact {
   border-collapse: collapse;
 }
+.AB434-CSS{width: 100%;}
 .tab-list {  border-bottom: 1px solid #ccc;
   padding-left: 0;
+}
+.homecsss {
+  display: grid;
+  text-align: center;
+  background: #dddddd5c;
+  padding: 40px 0;
+}
+.homecsss a:hover{color: #fff !important;}
+.row-height{padding: 80px 0 !important}
+.homecsss a{
+  background: #4c708f;
+  width: 80%;
+  margin: 0px auto;
+  padding: 10px;
+  font-size: 35px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
 }
 .customerinn  p{margin: 0;FONT-SIZE: 16PX;}
 .customerinn  {background: #cccccc5e;
@@ -209,7 +229,7 @@ animation: spin 1s linear infinite;
 }
 .widthff {width: 150px;}
 .H2TEXT {    text-align: center;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
   text-transform: uppercase;
   display: inline-block;

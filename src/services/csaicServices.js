@@ -1,6 +1,6 @@
 import axios from 'axios';
 import authHeader from './Header';
-const API_URL = 'http://10.8.0.9:9006/tenzinApi/tenzin/';
+const API_URL = 'http://localhost:9006/tenzinApi/tenzin/';
 
 class csaicService {
 

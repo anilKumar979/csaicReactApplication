@@ -10,6 +10,8 @@ import { authProvider } from './authProvider';
 import Login from './Login/Index';
 import NofaCreation from './Nofa/nofa-creation';
 import View from './Nofa/nofa';
+import Sales from './Nofa/sales-repo';
+import Home from './Nofa/home';
 
 
 
@@ -45,8 +47,10 @@ class Navigation extends React.Component {
                       <div>
                        
                         <Route path="/view/:id" exact component={View} />
-                        <Route path="/" exact component={NofaCreation} />
-                        <Route path="/admin" exact component={NofaCreation} />
+                        <Route path="/region" exact component={NofaCreation} />
+                        <Route path="/admin" exact component={Home} />
+                        <Route path="/" exact component={Home} />
+                        <Route path="/sales" exact component={Sales} />
                        
                         
 
